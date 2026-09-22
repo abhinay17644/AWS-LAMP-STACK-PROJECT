@@ -2,97 +2,171 @@
 
 ## Project Overview
 
-This project covers the deployment of a WordPress website on an Ubuntu-based Amazon EC2 instance.
+This project demonstrates the deployment of a WordPress website on an Ubuntu-based Amazon EC2 instance using a LAMP stack architecture.
 
-The EC2 instance was configured with Apache and PHP to host the WordPress application. Amazon RDS was used as the MySQL database, keeping the application and database on separate services.
+The application server was configured on Amazon EC2 with Apache as the web server, PHP as the application runtime, and WordPress as the web application. Amazon RDS was used as the MySQL database service, keeping the application and database components separated.
+
+The project covers the basic setup, configuration, database connectivity, WordPress configuration, and verification of the deployed website.
+
+---
 
 ## Project Architecture
 
 The deployment consists of the following components:
 
 - Amazon EC2 – Application and web server
-- Ubuntu – Operating system
+- Ubuntu Linux – Operating system
 - Apache – Web server
 - PHP – Application runtime
-- WordPress – Website application
+- WordPress – Web application
 - Amazon RDS – MySQL database
-- MySQL Client – Database connectivity and testing
+- MySQL Client – Used to test database connectivity
 
-## Implementation
+### Architecture Flow
 
-### 1. EC2 Instance Setup
+```text
+                 Internet
+                    |
+                    v
+             Amazon EC2
+            Ubuntu Server
+                    |
+                    v
+                Apache
+                    |
+                    v
+              PHP / WordPress
+                    |
+                    v
+             Amazon RDS MySQL
+Implementation Steps
+1. EC2 Web Server Setup
 
-An Ubuntu EC2 instance was prepared to host the WordPress application. The instance was accessed through the AWS EC2 Instance Connect environment.
+An Ubuntu-based Amazon EC2 instance was used as the application server.
 
-![EC2 Web Server Setup](EC2-WebServer-Setup.png.png)
+The instance provides the compute environment required to host the Apache web server, PHP runtime, and WordPress application.
 
-### 2. Ubuntu System Update
+2. Ubuntu System Update
 
-The Ubuntu system was updated before installing and configuring the required application packages.
+The Ubuntu server packages were updated before installing and configuring the application components.
 
-![Ubuntu System Update](Ubuntu-System-Update-and-Restart-Check.png.png)
+Keeping the operating system packages updated helps provide a stable environment for the application deployment.
 
-### 3. Apache Web Server
+3. Apache Web Server
 
-Apache was installed on the EC2 instance and configured as the web server for the WordPress application.
+Apache was configured as the web server for the WordPress application.
 
-The Apache service was checked to verify that it was running correctly.
+The Apache service was checked using systemctl to confirm that the service was active and running.
 
-![Apache Service Status](Apache-Service-Status.png.png)
+4. MySQL Client Installation
 
-### 4. MySQL Client Installation
+The MySQL client was installed on the EC2 instance.
 
-The MySQL client was installed on the EC2 instance to provide command-line access for testing the database connection.
+The client is used to connect from the application server to the MySQL database hosted on Amazon RDS.
 
-![MySQL Client Installation](Install-MySQL-Client.png.png)
+5. MySQL Database Connectivity
 
-### 5. Database Connectivity
+After installing the MySQL client, a database connection was established to the MySQL server.
 
-The MySQL client was used to connect to the database and verify connectivity from the EC2 instance.
+This step verified that the EC2 instance could communicate with the database service.
 
-![MySQL Client Connection](MySQL-Client-Connection.png.png)
+6. WordPress Database Configuration
 
-### 6. WordPress Database Configuration
+WordPress was configured to use the MySQL database.
 
-WordPress was configured to use the database hosted on Amazon RDS.
+The database configuration includes the database name, database username, password, and database host.
 
-The WordPress database configuration was updated with the required database name, username, password, and RDS endpoint.
+The database host points to the Amazon RDS endpoint rather than a local MySQL database.
 
-![WordPress Database Configuration](WordPress-Database-Configuration.png.png)
+7. WordPress Configuration and Security Settings
 
-### 7. WordPress Configuration
+The WordPress configuration file was reviewed and configured with the required application settings.
 
-The WordPress configuration file was reviewed and the required application and security settings were configured.
+Security-related configuration, including WordPress authentication keys and salts, was also handled as part of the configuration process.
 
-![WordPress Configuration](WordPress-Configuration-Security-Settings.png.png)
+8. WordPress Setup
 
-### 8. WordPress Installation
+After configuring the application and database connection, the WordPress setup page was accessed through the web server.
 
-After completing the server and database configuration, the WordPress installation page was accessed through the web server.
+This confirmed that the WordPress application was being served successfully from the EC2 instance.
 
-![WordPress Installation](Wordpress-Signup-page.png.png)
+![WordPress Setup](Wordpress Signup page.png.png)
 
-### 9. WordPress Website
+9. WordPress Home Page
 
-The WordPress installation was completed and the website was accessed successfully through the EC2-hosted web server.
+The final step was to verify the deployed WordPress website through the browser.
 
-![WordPress Home Page](Wordpress-Home-page.png.png)
+The WordPress home page confirmed that the web server, PHP application, WordPress files, and database configuration were working together.
 
-## Project Result
+![WordPress Home Page](Wordpress Home page.png.png)
 
-The WordPress application was deployed successfully on an Ubuntu EC2 instance using Apache and PHP, with Amazon RDS providing the MySQL database.
+Project Purpose
 
-The project also provided hands-on experience with configuring a web server, connecting an application to a remote database, and troubleshooting connectivity and application configuration issues.
+The purpose of this project was to gain practical experience in deploying a web application using AWS infrastructure.
 
-## Key Learnings
+The project demonstrates how an EC2 instance can be used as an application server while Amazon RDS provides a separate managed database service.
 
-- EC2 instance setup and management
-- Ubuntu server administration
-- Apache web server configuration
-- PHP installation and configuration
-- WordPress deployment
-- Amazon RDS and MySQL connectivity
-- WordPress database configuration
-- Basic Linux troubleshooting
-- Application and database connectivity testing
-- Project documentation using GitHub
+This approach separates the application and database layers and provides a foundation for further improvements such as load balancing, high availability, monitoring, and scaling.
+
+Key Technologies
+Technology	Purpose
+Amazon EC2	Hosts the application
+Ubuntu	Server operating system
+Apache	Web server
+PHP	WordPress application runtime
+WordPress	Web application
+Amazon RDS	Managed MySQL database
+MySQL Client	Database connectivity and testing
+What I Learned
+
+Through this project, I gained practical experience with:
+
+Launching and accessing an Ubuntu EC2 instance
+Performing basic Linux server administration
+Installing and managing Apache
+Installing and using the MySQL client
+Connecting an EC2 instance to an RDS MySQL database
+Configuring WordPress to use an external database
+Understanding the relationship between web, application, and database layers
+Verifying services and troubleshooting deployment issues
+Working with AWS resources through the AWS Management Console
+Future Improvements
+
+The current deployment can be extended into a more highly available architecture.
+
+Possible improvements include:
+
+Adding a second EC2 instance
+Creating an Application Load Balancer
+Configuring an EC2 Target Group
+Using Auto Scaling
+Improving database availability with appropriate RDS configuration
+Adding Amazon CloudWatch monitoring
+Configuring Route 53 for DNS management
+Using HTTPS with AWS Certificate Manager
+Conclusion
+
+This project provides a practical example of deploying WordPress using an AWS-based LAMP architecture.
+
+The application is hosted on an Ubuntu EC2 instance, while Amazon RDS provides the MySQL database layer. The implementation demonstrates the basic workflow from server preparation and web server configuration through database connectivity and WordPress deployment.
+
+
+### Important: one filename needs attention
+
+From your GitHub screenshot, these are the exact filenames:
+
+- `EC2-WebServer-Setup.png.png`
+- `Ubuntu-System-Update-and-Restart-Check.png.png`
+- `Install-MySQL-Client.png.png`
+- `MySQL-Client-Connection.png.png`
+- `WordPress-Configuration-Security-Settings.png.png`
+- `WordPress-Database-Configuration.png.png`
+- `Apache-Service-Status.png.png`
+- `Wordpress Signup page.png.png`
+- `Wordpress Home page.png.png`
+
+For the two filenames containing spaces, GitHub may handle them, but I recommend **renaming them to cleaner names**:
+
+```text
+WordPress-Setup-Page.png
+WordPress-Home-Page.png
