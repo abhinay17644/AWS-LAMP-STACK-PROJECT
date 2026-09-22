@@ -266,6 +266,24 @@ Possible future enhancements include:
 
 ---
 
+## Future Improvements
+
+The current deployment uses a single EC2 instance for the WordPress application and Amazon RDS for the database.
+
+The architecture can be enhanced further by introducing the following components:
+
+- A second EC2 instance for application redundancy
+- An Application Load Balancer to distribute incoming traffic
+- An EC2 Auto Scaling Group for automatic scaling
+- A Target Group to manage the application instances
+- Amazon CloudWatch for monitoring and alerts
+- HTTPS using AWS Certificate Manager
+- Amazon Route 53 for DNS management
+- Automated database backups and recovery procedures
+- High-availability architecture across multiple Availability Zones
+
+These improvements can help make the deployment more scalable, monitored, and resilient for production workloads.
+
 ## Conclusion
 
 This project demonstrates the deployment of a WordPress application using an AWS-based LAMP stack architecture.
